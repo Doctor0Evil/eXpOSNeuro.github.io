@@ -1,0 +1,8 @@
+[package]
+name = "realityos-neurotech"
+version = "0.1.0"
+
+[dependencies]
+neuroformats = { workspace = true }
+serde = { workspace = true }
+core = { path = "../core" }
