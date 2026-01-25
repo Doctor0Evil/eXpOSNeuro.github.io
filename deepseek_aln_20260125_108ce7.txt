@@ -1,0 +1,1 @@
+ROW,export,schema,scalar,fields,"sleepstage,psychrisklevel,psychriskscore,dreammode,player_state,quantum_roaming_allowed,infraComplianceScore,nodeid,eligibilityE,sleeptoken,enstasisscore",string,immutable,Enhanced debug fields

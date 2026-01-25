@@ -1,0 +1,2 @@
+# If quantum_consciousness occurs in other sleep stages
+ROW,rule,rule,condition,allowQuantumRoamExtended,"quantum_roaming_allowed = (sleepstage in N1,N2,N3,REM) AND (eligibilityE >= emin) AND (psychriskscore <= rmax) AND (dreammode == quantum_consciousness)",string,readonly,Extended guard

@@ -1,0 +1,5 @@
+# Add to your quantum-roaming-debug shard for diagnostics
+SECTION,DIAGNOSTIC-LOGGING
+ROW,diagnostic,log,condition,logRoamingFailure,"if dreammode == quantum_consciousness and player_state == observer_only and not quantum_roaming_allowed then logtype=debug, message='Roaming blocked: sleepstage=' + sleepstage + ', eligibilityE=' + eligibilityE + ', psychriskscore=' + psychriskscore",string,readonly,Log failure reasons
+ROW,diagnostic,metric,scalar,sleeptoken_threshold,0.65,float,range0,1,Minimum sleeptoken for quantum_roaming
+ROW,diagnostic,metric,scalar,enstasisscore_threshold,0.7,float,range0,1,Minimum stability score

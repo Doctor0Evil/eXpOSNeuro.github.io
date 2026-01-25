@@ -1,0 +1,2 @@
+# Emergency override for development testing only
+ROW,rule,override,condition,forceQuantumRoamDev,"if dreammode == quantum_consciousness and player_state == observer_only and subjectid == 'YOUR_DEV_ID' then player_state = quantum_roaming",string,readonly,DEV ONLY - Override

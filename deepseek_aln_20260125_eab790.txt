@@ -1,0 +1,36 @@
+destination-path,xr-grid.quantum-roaming-debug.v2.aln
+QPU.Datashard,Quantum roaming vs observer_only state debug with logging
+path,entitytype,field,key,value,datatype,constraints,notes
+SECTION,SUBJECT-STATE
+ROW,subject,subject,scalar,subjectid,,string,primarykey,Augmented user ID
+ROW,subject,subject,enum,sleepstage,wake,string,wake,N1,N2,N3,REM,Validated sleep stage
+ROW,subject,subject,scalar,sleeptoken,0.0,float,range0,1,S in E = S(1-R)Es
+ROW,subject,subject,scalar,psychriskscore,0.0,float,range0,1,R psych-risk
+ROW,subject,subject,scalar,enstasisscore,1.0,float,range0,1,Es stability
+ROW,subject,subject,enum,dreammode,passive,string,passive,active,quantum_consciousness,XR-only dream mode
+ROW,subject,subject,enum,player_state,observer_only,string,observer_only,active_roaming,quantum_roaming,Logical player state
+
+SECTION,DERIVED
+ROW,derived,session,scalar,eligibilityE,0.0,float,range0,1,E = S(1-R)Es
+ROW,derived,session,scalar,emin,0.5,float,range0,1,Eligibility threshold
+ROW,derived,session,scalar,rmax,0.35,float,range0,1,Psych-risk roaming ceiling
+ROW,derived,session,flag,quantum_roaming_allowed,false,bool,nonnull,True when roaming guard passes
+
+SECTION,LOGGING
+ROW,log,log,scalar,logid,0,int,auto,Log entry ID
+ROW,log,log,enum,logtype,debug,string,debug,info,warn,error,Log type
+ROW,log,log,scalar,message,,string,nonnull,Log message
+
+SECTION,RUNTIME-RULES
+ROW,rule,rule,expression,computeE,"eligibilityE = sleeptoken * (1.0 - psychriskscore) * enstasisscore",string,readonly,Safety vector
+ROW,rule,rule,condition,allowQuantumRoam,"quantum_roaming_allowed = (sleepstage in N2,N3) AND (eligibilityE >= emin) AND (psychriskscore <= rmax)",string,readonly,Guard for roaming
+ROW,rule,rule,condition,forceObserverOnHighRisk,"if psychriskscore > rmax then player_state = observer_only",string,readonly,High-risk clamp
+ROW,rule,rule,condition,exitObserverOnSafe,"if quantum_roaming_allowed and dreammode == quantum_consciousness then player_state = quantum_roaming",string,readonly,Exit from observer_only when safe
+ROW,rule,rule,condition,logRoamingFailure,"if dreammode == quantum_consciousness and player_state == observer_only and not quantum_roaming_allowed then logtype=debug, message='Quantum roaming disallowed: sleepstage=' + sleepstage + ', eligibilityE=' + eligibilityE + ', psychriskscore=' + psychriskscore",string,readonly,Log why roaming is disallowed
+
+SECTION,NEURORIGHTS-GUARDS
+ROW,guard,policy,flag,mentalprivacy,true,bool,nonwaivable,No dream text/audio/images here
+ROW,guard,policy,flag,cognitiveliberty,true,bool,nonwaivable,No coercive state forcing beyond safety
+ROW,guard,policy,flag,nopunitivexr,true,bool,nonwaivable,States not used for punishment
+ROW,guard,policy,flag,soulnonaddressable,true,bool,nonwaivable,No soul or belief fields
+FOOTER,END-OF-SHARD

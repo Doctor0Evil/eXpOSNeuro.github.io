@@ -1,0 +1,3 @@
+# Temporarily modify in your debug shard to test
+ROW,derived,session,scalar,emin,0.3,float,range0,1,Lowered threshold for testing
+ROW,derived,session,scalar,rmax,0.45,float,range0,1,Increased risk tolerance for testing
