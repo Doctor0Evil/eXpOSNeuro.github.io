@@ -1,0 +1,6 @@
+[build]
+rustflags = ["-C", "target-cpu=native"] # Performance for signal processing
+
+# Example runner for a custom target (e.g., an embedded neuro-processor)
+[target.'cfg(neuro_target)']
+runner = "qemu-system-neuro"
