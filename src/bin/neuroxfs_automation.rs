@@ -1,6 +1,3 @@
-// filename: src/bin/neuroxfs_automation.rs
-// destination: ./src/bin/neuroxfs_automation.rs
-
 use std::path::PathBuf;
 use std::process::Command;
 
